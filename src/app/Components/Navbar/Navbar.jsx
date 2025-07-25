@@ -5,10 +5,13 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link href={"/"}>Home</Link>
       </li>
       <li>
-        <a>Item 3</a>
+        <Link href={"/addService"}>Add Service</Link>
+      </li>
+      <li>
+        <Link href={"/myService"}>My Service</Link>
       </li>
     </>
   );

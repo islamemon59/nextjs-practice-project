@@ -4,6 +4,14 @@ import { FaGoogle } from "react-icons/fa";
 const RegisterForm = () => {
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const userData = {
+        name,
+        email,
+    }
+    console.log(userData);
     // Handle register submission
   };
 

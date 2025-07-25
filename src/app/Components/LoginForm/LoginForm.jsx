@@ -1,10 +1,31 @@
-"use client"
+"use client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 
 const LoginForm = () => {
-  const handleLogin = (e) => {
+  const router = useRouter();
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({ email, password });
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (res.ok) {
+      router.push("/");
+    } else {
+      alert("Login failed");
+    }
+
+    console.log(res);
     // Handle login submission
   };
 
