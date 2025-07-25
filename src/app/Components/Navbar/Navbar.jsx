@@ -1,7 +1,12 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
+  const { data: session, status } = useSession();
+  console.log(session);
+
   const links = (
     <>
       <li>
@@ -50,12 +55,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end gap-4">
-        <Link href={"/login"} className="btn rounded">
-          Login
-        </Link>
-        <Link href={"/register"} className="btn rounded">
-          Register
-        </Link>
+        {session?.user ? (
+          <button className="btn">Logout</button>
+        ) : (
+          <>
+            <Link href={"/login"} className="btn rounded">
+              Login
+            </Link>
+            <Link href={"/register"} className="btn rounded">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
