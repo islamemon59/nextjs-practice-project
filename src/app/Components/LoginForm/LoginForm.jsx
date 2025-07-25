@@ -1,0 +1,53 @@
+"use client"
+import React from "react";
+import { FaGoogle } from "react-icons/fa";
+
+const LoginForm = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Handle login submission
+  };
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-xl">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form onSubmit={handleLogin}>
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Email</span>
+          <input
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            className="input input-bordered w-full"
+          />
+        </label>
+
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Password</span>
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            className="input input-bordered w-full"
+          />
+        </label>
+
+        <button type="submit" className="btn btn-primary w-full mt-4">
+          Login
+        </button>
+
+        <div className="divider">OR</div>
+
+        <button
+          type="button"
+          className="btn btn-outline w-full flex items-center justify-center gap-2"
+        >
+          <FaGoogle />
+          Continue with Google
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;

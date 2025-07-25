@@ -1,0 +1,57 @@
+"use client"
+import { FaGoogle } from "react-icons/fa";
+
+const RegisterForm = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
+    // Handle register submission
+  };
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-xl">
+      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <form onSubmit={handleRegister}>
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Full Name</span>
+          <input
+            name="name"
+            type="text"
+            placeholder="Your full name"
+            className="input input-bordered w-full"
+          />
+        </label>
+
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Email</span>
+          <input
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            className="input input-bordered w-full"
+          />
+        </label>
+
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Password</span>
+          <input
+            name="password"
+            type="password"
+            placeholder="Create a password"
+            className="input input-bordered w-full"
+          />
+        </label>
+
+        <button type="submit" className="btn btn-primary w-full mt-4">Register</button>
+
+        <div className="divider">OR</div>
+
+        <button type="button" className="btn btn-outline w-full flex items-center justify-center gap-2">
+          <FaGoogle />
+          Sign up with Google
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default RegisterForm;
