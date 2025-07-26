@@ -1,18 +1,34 @@
-"use client"
+"use client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 
 const RegisterForm = () => {
-  const handleRegister = (e) => {
+  const router = useRouter();
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const userData = {
-        name,
-        email,
+      name,
+      email,
+      role: "user",
+    };
+
+    const res = await fetch("http://localhost:3000/api/register", {
+      method: "POST",
+      body: JSON.stringify(userData),
+    });
+
+    const data = await res.json();
+
+    if (data.insertedId) {
+      router.push("/login");
+      form.reset();
+    } else {
+      toast.error("No user found");
     }
-    console.log(userData);
-    // Handle register submission
   };
 
   return (
@@ -49,11 +65,16 @@ const RegisterForm = () => {
           />
         </label>
 
-        <button type="submit" className="btn btn-primary w-full mt-4">Register</button>
+        <button type="submit" className="btn btn-primary w-full mt-4">
+          Register
+        </button>
 
         <div className="divider">OR</div>
 
-        <button type="button" className="btn btn-outline w-full flex items-center justify-center gap-2">
+        <button
+          type="button"
+          className="btn btn-outline w-full flex items-center justify-center gap-2"
+        >
           <FaGoogle />
           Sign up with Google
         </button>

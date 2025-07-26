@@ -2,6 +2,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 
 const LoginForm = () => {
@@ -22,10 +23,9 @@ const LoginForm = () => {
     if (res.ok) {
       router.push("/");
     } else {
-      alert("Login failed");
+      toast.error("No user found")
     }
 
-    console.log(res);
     // Handle login submission
   };
 
