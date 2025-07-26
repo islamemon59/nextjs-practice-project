@@ -1,4 +1,5 @@
 "use client";
+import { uploadImage } from "@/app/api/image/route";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
@@ -10,9 +11,13 @@ const RegisterForm = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
+    const image = form.photo.files[0]
+    const {data} = await uploadImage(image)
+    console.log(data.display_url);
     const userData = {
       name,
       email,
+      image: data.display_url,
       role: "user",
     };
 
@@ -21,13 +26,13 @@ const RegisterForm = () => {
       body: JSON.stringify(userData),
     });
 
-    const data = await res.json();
+    const resData = await res.json();
 
-    if (data.insertedId) {
+    if (resData.insertedId) {
       router.push("/login");
       form.reset();
     } else {
-      toast.error("No user found");
+      toast.error("Registration Failed");
     }
   };
 
@@ -40,6 +45,15 @@ const RegisterForm = () => {
           <input
             name="name"
             type="text"
+            placeholder="Your full name"
+            className="input input-bordered w-full"
+          />
+        </label>
+        <label className="form-control w-full">
+          <span className="label-text font-medium">Upload Photo</span>
+          <input
+            name="photo"
+            type="file"
             placeholder="Your full name"
             className="input input-bordered w-full"
           />
