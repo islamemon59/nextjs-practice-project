@@ -7,7 +7,6 @@ import Loader from "../Loader/Loader";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  console.log(session);
   if(status === "loading") return <Loader/>
 
   const links = (
