@@ -2,7 +2,8 @@
 import { uploadImage } from "@/app/api/image/route";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { FaGoogle } from "react-icons/fa";
+import GoogleSocialLogin from "../GoogleSocialLogin/GoogleSocialLogin";
+import { registerUser } from "@/app/action/auth/registerUser";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -10,25 +11,23 @@ const RegisterForm = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const password = form.password.value;
     const email = form.email.value;
-    const image = form.photo.files[0]
-    const {data} = await uploadImage(image)
+    const image = form.photo.files[0];
+    const { data } = await uploadImage(image);
     console.log(data.display_url);
     const userData = {
       name,
       email,
+      password,
       image: data.display_url,
       role: "user",
     };
 
-    const res = await fetch("http://localhost:3000/api/register", {
-      method: "POST",
-      body: JSON.stringify(userData),
-    });
+    const result = await registerUser(userData)
+    console.log(result);
 
-    const resData = await res.json();
-
-    if (resData.insertedId) {
+    if (result.insertedId) {
       router.push("/login");
       form.reset();
     } else {
@@ -56,6 +55,7 @@ const RegisterForm = () => {
             type="file"
             placeholder="Your full name"
             className="input input-bordered w-full"
+            required
           />
         </label>
 
@@ -85,13 +85,7 @@ const RegisterForm = () => {
 
         <div className="divider">OR</div>
 
-        <button
-          type="button"
-          className="btn btn-outline w-full flex items-center justify-center gap-2"
-        >
-          <FaGoogle />
-          Sign up with Google
-        </button>
+        <GoogleSocialLogin />
       </form>
     </div>
   );

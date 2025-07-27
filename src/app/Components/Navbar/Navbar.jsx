@@ -1,11 +1,14 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Loader from "../Loader/Loader";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
   console.log(session);
+  if(status === "loading") return <Loader/>
 
   const links = (
     <>
@@ -59,7 +62,7 @@ const Navbar = () => {
           <>
             <div className="avatar">
               <div className="w-10 rounded-full">
-                <img src={session?.user?.image} />
+                <Image width={20} height={20} alt="user-image" src={session?.user?.image} />
               </div>
             </div>
             <button onClick={() => signOut()} className="btn">Logout</button>

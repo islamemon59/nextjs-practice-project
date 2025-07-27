@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
+import GoogleSocialLogin from "../GoogleSocialLogin/GoogleSocialLogin";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const LoginForm = () => {
     if (res.ok) {
       router.push("/");
     } else {
-      toast.error("No user found")
+      toast.error("No user found");
     }
 
     // Handle login submission
@@ -59,13 +60,7 @@ const LoginForm = () => {
 
         <div className="divider">OR</div>
 
-        <button
-          type="button"
-          className="btn btn-outline w-full flex items-center justify-center gap-2"
-        >
-          <FaGoogle />
-          Continue with Google
-        </button>
+        <GoogleSocialLogin />
       </form>
     </div>
   );
