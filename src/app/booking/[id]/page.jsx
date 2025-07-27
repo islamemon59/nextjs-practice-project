@@ -3,7 +3,7 @@ import React from 'react';
 
 const SingleBooking = async ({params}) => {
     const {id} = await params;
-    const res = await fetch(`http://localhost:3000/api/service/${id}`)
+    const res = await fetch(`http://localhost:3000/api/booking/${id}`)
     const data = await res.json();
     console.log(data);
     return (
