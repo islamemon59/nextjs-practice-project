@@ -2,6 +2,7 @@
 import React from "react";
 import { FiEdit } from "react-icons/fi";
 import DeleteServiceData from "../Components/DeleteServiceData/DeleteServiceData";
+import Link from "next/link";
 
 const SingleService = async ({ params }) => {
   const { id } = await params;
@@ -20,9 +21,9 @@ const SingleService = async ({ params }) => {
           <p>Address: {data.address}</p>
 
           <div className="card-actions justify-end">
-            <button className="btn btn-outline btn-info btn-sm flex items-center gap-1">
+            <Link href={`/booking/${data._id}`} className="btn btn-outline btn-info btn-sm flex items-center gap-1">
               <FiEdit /> Edit
-            </button>
+            </Link>
             <DeleteServiceData data={data} /> 
           </div>
         </div>
